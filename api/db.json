@@ -1,22 +1,13 @@
 {
-  "users": [
+  "usuarios": [
     {
-      "id": 1,
       "username": "user1",
       "name": "John",
-      "lastname": "Doe",
+      "age": 30,
       "email": "john.doe@example.com",
-      "status": "active",
-      "age": 30
-    },
-    {
-      "id": 2,
-      "username": "user2",
-      "name": "Jane",
-      "lastname": "Smith",
-      "email": "jane.smith@example.com",
+      "lastname": "Agüero",
       "status": "inactive",
-      "age": 25
+      "id": 1
     },
     {
       "id": 3,
@@ -37,13 +28,13 @@
       "age": 28
     },
     {
-      "id": 5,
       "username": "user5",
       "name": "William",
       "lastname": "Wilson",
       "email": "william.wilson@example.com",
+      "age": 20,
       "status": "inactive",
-      "age": 40
+      "id": 5
     },
     {
       "id": 6,
@@ -55,13 +46,13 @@
       "age": 32
     },
     {
-      "id": 7,
       "username": "user7",
       "name": "James",
-      "lastname": "Taylor",
+      "age": 45,
       "email": "james.taylor@example.com",
+      "lastname": "Rodríguez",
       "status": "inactive",
-      "age": 45
+      "id": 7
     },
     {
       "id": 8,
@@ -415,13 +406,13 @@
       "age": 32
     },
     {
-      "id": 47,
       "username": "user47",
       "name": "Isaac",
-      "lastname": "Cooper",
+      "age": 29,
       "email": "isaac.cooper@example.com",
+      "lastname": "Cooper",
       "status": "active",
-      "age": 29
+      "id": 47
     },
     {
       "id": 48,
@@ -449,6 +440,42 @@
       "email": "grace.allen@example.com",
       "status": "active",
       "age": 32
+    },
+    {
+      "username": "user2",
+      "name": "Alex ",
+      "lastname": "Agüero",
+      "email": "aguero@example.com",
+      "age": 25,
+      "status": "active",
+      "id": 52
+    },
+    {
+      "username": "user0",
+      "name": "Cleo",
+      "age": 7,
+      "email": "perez@example.com",
+      "lastname": "Pérez",
+      "status": "active",
+      "id": 53
+    },
+    {
+      "username": "user98",
+      "name": "prueba",
+      "age": 21,
+      "email": "john.doe@example.com",
+      "lastname": "prueba2",
+      "status": "inactive",
+      "id": 54
+    },
+    {
+      "username": "user92",
+      "name": "Alex",
+      "age": 24,
+      "email": "john.doe@example.com",
+      "lastname": "Agüero",
+      "status": "active",
+      "id": 56
     }
   ]
 }
