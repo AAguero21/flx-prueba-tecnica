@@ -3,7 +3,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 export default function UserTable({ usuarios, onEdit, onDelete }) {
   const [sortedData, setSortedData] = useState([]);
-  const [pagination, setPagination] = useState({ current: 1, pageSize: 10 });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const lastSorterRef = useRef({}); // Referencia para mantener el ordenamiento actual
 
   // Función para comparar los valores numéricos dentro de las cadenas
@@ -19,11 +20,8 @@ export default function UserTable({ usuarios, onEdit, onDelete }) {
 
   // Maneja el cambio en la tabla, tanto para ordenar como para paginar
   const handleTableChange = useCallback((pagination, filters, sorter) => {
-    setPagination({
-      current: pagination.current,
-      pageSize: pagination.pageSize,
-    });
-
+    setCurrentPage(pagination.current);
+    setPageSize(pagination.pageSize);
     lastSorterRef.current = sorter; // Guardamos el último sorter usado
 
     let data = [...usuarios];
@@ -37,7 +35,6 @@ export default function UserTable({ usuarios, onEdit, onDelete }) {
         const numsA = extractNumbers(usernameA);
         const numsB = extractNumbers(usernameB);
 
-        // Comparar números primero, luego las cadenas
         for (let i = 0; i < Math.min(numsA.length, numsB.length); i++) {
           if (numsA[i] !== numsB[i]) {
             return numsA[i] - numsB[i];
@@ -62,23 +59,21 @@ export default function UserTable({ usuarios, onEdit, onDelete }) {
     }
 
     // Aplicamos la paginación en base al offset
-    const { current, pageSize } = pagination;
-    const offset = (current - 1) * pageSize;
-    const limit = pageSize;
-    const paginatedData = data.slice(offset, offset + limit);
+    const offset = (pagination.current - 1) * pagination.pageSize;
+    const paginatedData = data.slice(offset, offset + pagination.pageSize);
 
     setSortedData(paginatedData);
-  }, [usuarios]); 
+  }, [usuarios]);
 
+  // Se ejecuta cuando cambia la lista de usuarios o la paginación
   useEffect(() => {
-    // los datos se van a cagar correctamente cuando se inicia el componente 
     handleTableChange(
-      { current: pagination.current, pageSize: pagination.pageSize },
+      { current: currentPage, pageSize },
       {},
       lastSorterRef.current || {}
     );
-  }, [usuarios, handleTableChange, pagination]);
-   
+  }, [usuarios, currentPage, pageSize, handleTableChange]);
+
   // Definición de las columnas de la tabla
   const columns = [
     {
@@ -138,12 +133,13 @@ export default function UserTable({ usuarios, onEdit, onDelete }) {
       columns={columns}
       onChange={handleTableChange}
       pagination={{
-        current: pagination.current,
-        pageSize: pagination.pageSize,
+        current: currentPage,
+        pageSize,
         total: usuarios.length,
         showSizeChanger: false,
-        onChange: (page, pageSize) => {
-          setPagination({ current: page, pageSize });
+        onChange: (page, size) => {
+          setCurrentPage(page);
+          setPageSize(size);
         },
       }}
     />
